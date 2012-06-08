@@ -51,21 +51,26 @@ if(app.documents.length > 0)
 		
 		//size, justification and position
 		textItemRef.size = 11;
-		textItemRef.justification = Justification.RIGHT
-
+		textItemRef.justification = Justification.CENTER;
+		textItemRef.kind = TextType.PARAGRAPHTEXT;
+		
+		//alert(textItemRef.width);
+		
 		if(layerWidth > layerHeight)
 		{
 			//layer is horizontal
 			textItemRef.contents = layerWidth;
 			textLayerRef.name = layerWidth;
-			textCoords.y -= 4;
+			textCoords.y -= 10;
+			textCoords.x -= parseInt(textItemRef.width / 2);
 		}
 		else
 		{
 			//layer is vertical
 			textItemRef.contents = layerHeight;
 			textLayerRef.name = layerHeight;
-			textCoords.x -= 4;
+			textCoords.x -= 24;
+			textCoords.y -= parseInt(textItemRef.height / 2);
 		}
 		
 		textItemRef.position = Array(textCoords.x, textCoords.y);
