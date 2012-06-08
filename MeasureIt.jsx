@@ -7,6 +7,7 @@ if(app.documents.length > 0)
     var doc = app.activeDocument;
     var miLayer = doc.layerSets["mi_lines"];
 	var allLayers = miLayer.artLayers;
+	var newLayerSetRef = doc.layerSets.add()
 	
 	/**
 	 * loop the selected layers
@@ -36,23 +37,9 @@ if(app.documents.length > 0)
 		var layerName = cLayer.name;
 		
 		//add text
-		var textLayerRef = doc.artLayers.add()
-		textLayerRef.name = "mi_"+layerName;
+		var textLayerRef = newLayerSetRef.artLayers.add()
 		textLayerRef.kind = LayerKind.TEXT;
-		var textItemRef = doc.artLayers["mi_"+layerName].textItem;
-		
-		if(layerWidth > layerHeight)
-		{
-			//layer is horizontal
-			textItemRef.contents = layerWidth;
-			textCoords.y -= 10;
-		}
-		else
-		{
-			//layer is vertical
-			textItemRef.contents = layerHeight;
-			textCoords.x -= 10;
-		}
+		var textItemRef = textLayerRef.textItem;
 		
 		//Text color
 		textColor = new SolidColor();
@@ -65,6 +52,22 @@ if(app.documents.length > 0)
 		//size, justification and position
 		textItemRef.size = 11;
 		textItemRef.justification = Justification.RIGHT
+
+		if(layerWidth > layerHeight)
+		{
+			//layer is horizontal
+			textItemRef.contents = layerWidth;
+			textLayerRef.name = layerWidth;
+			textCoords.y -= 4;
+		}
+		else
+		{
+			//layer is vertical
+			textItemRef.contents = layerHeight;
+			textLayerRef.name = layerHeight;
+			textCoords.x -= 4;
+		}
+		
 		textItemRef.position = Array(textCoords.x, textCoords.y);
 		
 	}
