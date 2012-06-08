@@ -41,20 +41,13 @@ if(app.documents.length > 0)
 		textLayerRef.kind = LayerKind.TEXT;
 		var textItemRef = textLayerRef.textItem;
 		
-		//Text color
-		textColor = new SolidColor();
-		textColor.rgb.red = 218;
-		textColor.rgb.green = 151;
-		textColor.rgb.blue = 57;
-		
+		//set color to the currently selected foreground color
 		textItemRef.color = app.foregroundColor;
 		
-		//size, justification and position
+		//size, justification
 		textItemRef.size = 11;
 		textItemRef.justification = Justification.CENTER;
 		textItemRef.kind = TextType.PARAGRAPHTEXT;
-		
-		//alert(textItemRef.width);
 		
 		if(layerWidth > layerHeight)
 		{
@@ -73,12 +66,18 @@ if(app.documents.length > 0)
 			textCoords.y -= parseInt(textItemRef.height / 2);
 		}
 		
+		//set posiiton of text
 		textItemRef.position = Array(textCoords.x, textCoords.y);
 		
 	}
 }
 
-function _calculateTextCenter(point1, point2){
+/**
+ * Function to calculate the 
+ * centered coordinates of two points
+ */
+function _calculateTextCenter(point1, point2)
+{
 	var xs = 0;
 	var ys = 0;
 	
